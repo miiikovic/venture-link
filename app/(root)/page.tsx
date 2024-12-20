@@ -2,7 +2,12 @@
 export default function Home() {
   return (
     <>
-      <h1 className="text-2xl">Home</h1>
+    <section className="pink_container">
+      <h1 className="heading">Share your vision, <br /> connect with innovators</h1>
+      <p className="sub-heading !max-w-3xl">
+        Submit, vote, and compete — your entrepreneurial journey starts here.
+      </p>
+    </section>
     </>
   );
 }
