@@ -7,11 +7,11 @@ export default async function Home({ searchParams }: {
 
   const query = (await searchParams).query;
 
-  const posts = [{ _createdAt: new Date(), views: 55, author: { _id: 1, }, _id: 1, description: 'This is a description', image: 'https://files.oaiusercontent.com/file-HGvePrKcTWa8HrmyTDSamr?se=2024-12-20T14%3A09%3A09Z&sp=r&sv=2024-08-04&sr=b&rscc=max-age%3D604800%2C%20immutable%2C%20private&rscd=attachment%3B%20filename%3Dd28963d4-bdfd-469b-b342-2d186307d1aa.webp&sig=0IruYpW0ukZlIysGBaAwddO5980GImaAQrPsVBhl4Fs%3D', category: 'Healthcare', title: 'Dr Medico' },];
+  const posts = [{ _createdAt: new Date(), views: 55, author: { _id: 1, name: 'Dr Momčilo Miković' }, _id: 1, description: 'Your chosen healthcare agency.', image: 'https://images.unsplash.com/photo-1550831106-f8d5b6f1abe9?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', category: 'Healthcare', title: 'Dr Medico' },];
  
   return (
     <>
-    <section className="pink_container">
+    <section className="pink_container"> 
       <h1 className="heading">Share your vision, <br /> connect with innovators</h1>
       <p className="sub-heading !max-w-3xl">
         Submit, vote, and compete — your entrepreneurial journey starts here.
