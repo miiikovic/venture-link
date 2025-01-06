@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import Image from 'next/image'
 import { Button } from './ui/button'
+import CircularIcon from './CircularIcon'
 
 const StartupCard = ({ post }: {post: StartupTypeCard }) => {
   const { _createdAt, views, author: { _id: authorId, name }, title, category, _id, image, description } = post;
@@ -20,8 +21,16 @@ const StartupCard = ({ post }: {post: StartupTypeCard }) => {
             </div>
         </div>
 
+        <div className="flex-between mt-3 gap-2">
+            <div className="flex-between gap-2">
+                <p>Chains:</p>
+                <CircularIcon imageUrl={'solanachain.svg'} />
+            </div>
+            <div className="left"></div>
+        </div>
 
-        <div className="flex-between mt-5 gap-5">
+
+        <div className="flex-between mt-3 gap-5">
             <div className="flex-1">
                 <Link href={`/user/${authorId}`}>
                     <p className="text-16-medium line-clamp-1">
