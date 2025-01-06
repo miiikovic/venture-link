@@ -50,8 +50,8 @@ const workSans = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "VentureLink",
-  description: "Let's build together!",
+  title: "NewProject",
+  description: "This is where your entrepreneurial journey begins.",
 };
 
 export default function RootLayout({
