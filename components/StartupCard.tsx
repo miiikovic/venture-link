@@ -5,9 +5,13 @@ import React from 'react'
 import Image from 'next/image'
 import { Button } from './ui/button'
 import CircularIcon from './CircularIcon'
+import { Author, Startup } from '@/sanity.types'
+
+
+export type StartupTypeCard = Omit<Startup, "author"> & { author?: Author};
 
 const StartupCard = ({ post }: {post: StartupTypeCard }) => {
-  const { _createdAt, views, author: { _id: authorId, name }, title, category, _id, image, description } = post;
+  const { _createdAt, views, author, title, category, _id, image, description } = post;
   
   return (
     <li className='startup-card group'>
@@ -31,9 +35,9 @@ const StartupCard = ({ post }: {post: StartupTypeCard }) => {
 
         <div className="flex-between mt-3 gap-5">
             <div className="flex-1">
-                <Link href={`/user/${authorId}`}>
+                <Link href={`/user/${author?._id}`}>
                     <p className="text-16-medium line-clamp-1">
-                        {name}
+                        {author?.name}
                     </p>
                     
                 </Link>
@@ -43,7 +47,7 @@ const StartupCard = ({ post }: {post: StartupTypeCard }) => {
                     </h3>
                 </Link>
             </div>
-            <Link href={`/user/${authorId}`}>
+            <Link href={`/user/${author?._id}`}>
                 <Image src="http://placehold.co/48x48" alt="placeholder" width={48} height={48} className='rounded-full'/>
             </Link>
         </div>
@@ -56,7 +60,7 @@ const StartupCard = ({ post }: {post: StartupTypeCard }) => {
         </Link>
 
         <div className="flex-between gap-3 mt-5">
-            <Link href={`/?query=${category.toLowerCase()}`}>
+            <Link href={`/?query=${category?.toLowerCase()}`}>
                 <p className='text-16-medium'>
                     {category}
                 </p>
