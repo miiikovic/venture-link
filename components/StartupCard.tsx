@@ -23,7 +23,6 @@ const StartupCard = ({ post }: {post: StartupTypeCard }) => {
 
         <div className="flex-between mt-3 gap-2">
             <div className="flex-between gap-2">
-                <p>Chains:</p>
                 <CircularIcon imageUrl={'solanachain.svg'} />
             </div>
             <div className="left"></div>

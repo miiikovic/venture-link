@@ -1,5 +1,7 @@
 import StartupCard from "@/components/StartupCard";
 import SearchForm from "../../components/SearchForm";
+import { client } from "@/sanity/lib/client";
+import { STARTUPS_QUERY } from "@/sanity/lib/queries";
 
 export default async function Home({ searchParams }: {
   searchParams: Promise<{query?: string} >
@@ -7,8 +9,10 @@ export default async function Home({ searchParams }: {
 
   const query = (await searchParams).query;
 
-  const posts = [{ _createdAt: new Date(), views: 55, author: { _id: 1, name: 'Momčilo' }, _id: 1, description: 'Your chosen healthcare agency.', image: 'https://images.unsplash.com/photo-1550831106-f8d5b6f1abe9?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', category: 'Healthcare', title: 'Dr Medico' },];
- 
+  // const posts = [{ _createdAt: new Date(), views: 55, author: { _id: 1, name: 'Momčilo' }, _id: 1, description: 'Your chosen healthcare agency.', image: 'https://images.unsplash.com/photo-1550831106-f8d5b6f1abe9?q=80&w=2787&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', category: 'Healthcare', title: 'Dr Medico' },];
+  const posts = await client.fetch(STARTUPS_QUERY);
+
+  console.log(JSON.stringify(posts, null, 2));
   return (
     <>
     <section className="pink_container"> 
