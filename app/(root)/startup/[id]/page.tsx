@@ -4,7 +4,13 @@ import { STARTUP_BY_ID_QUERY } from '@/sanity/lib/queries';
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import React from 'react'
+import React, { Suspense } from 'react'
+
+import markdownit from 'markdown-it';
+import { Skeleton } from '@/components/ui/skeleton';
+import View from '@/components/View';
+
+const md = markdownit();
 
 export const experimental_ppr = true;
 
@@ -14,6 +20,8 @@ const Page = async ({ params }: { params: Promise<{ id: string }>}) => {
   const post = await client.fetch(STARTUP_BY_ID_QUERY, { id });
 
   if (!post) return notFound();
+
+  const parsedContent = md.render(post?.pitch || '');
 
   return (
     <>
@@ -35,13 +43,12 @@ const Page = async ({ params }: { params: Promise<{ id: string }>}) => {
 
             <div className="space-y-5 mt-10 max-w-4xl mx-auto">
                 <div className="flex-between gap-5">
-                    {post && post.author ? (
                     <Link
                         href={`/user/${post.author?._id}`}
                         className="flex gap-2 items-center mb-3"
                         >
                         <Image
-                            src={post?.author?.image}
+                            src={post.author?.image}
                             alt="avatar"
                             width={64}
                             height={64}
@@ -49,17 +56,38 @@ const Page = async ({ params }: { params: Promise<{ id: string }>}) => {
                         />
 
                         <div>
-                            <p className="text-20-medium">{post.author.name}</p>
+                            <p className="text-20-medium">{post.author?.name}</p>
                             <p className="text-16-medium !text-black-300">
-                            @{post.author.username}
+                            @{post.author?.username}
                             </p>
                         </div>
                     </Link>
-                    ): (
-                        <p>Post author not found</p>
-                    )}
+
+                    <p className="category-tag">
+                        {post.category}
+                    </p>
                 </div>
+                <h3 className='text-30-bold'>Pitch details</h3>
+                {parsedContent ? (
+                    <article
+                        className='prose maw-w-4xl font-work-sans break-all'
+                        dangerouslySetInnerHTML={{ __html: parsedContent }}
+                    />
+                ) : (
+                    <p className='no-result'>No details provided</p>
+                )}
+
             </div>
+            <hr className='divider' />
+
+            {/* TO-DO: EDITOR SELECTED STARTUPS */}
+            <Suspense fallback={<Skeleton className='view-skeleton' />}>
+                <View id={id} />
+            </Suspense>
+        </section>
+
+        <section>
+
         </section>
     </>
   )
