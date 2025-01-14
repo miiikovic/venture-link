@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
         port: '', // Optional: Leave empty to match any port
         pathname: '/**', // Allow all paths under this hostname
       },
+      {
+        protocol: 'http',
+        hostname: '*',
+        port: '', // Optional: Leave empty to match any port
+        pathname: '/**', // Allow all paths under this hostname
+      },
     ]
   },
     experimental: {
